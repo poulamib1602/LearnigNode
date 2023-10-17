@@ -5,6 +5,9 @@ const noteRoute = require('./routes/noteRoutes');
 
 const mongoose = require('mongoose');
 
+const dotenv = require('dotenv')
+dotenv.config()
+
 app.use(express.json());
 
 app.use ((req,res,next)=>{
@@ -20,7 +23,7 @@ app.get("/",(req,res)=>{
     res.send('hello');
 });
 
-mongoose.connect("mongodb+srv://admin:admin@cluster0.97gtqkr.mongodb.net/")
+mongoose.connect(process.env.MONGO_URL)
 .then(()=>{
     app.listen(3000,()=>{
         console.log('the port is running on 3000')
